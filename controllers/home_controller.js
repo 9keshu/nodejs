@@ -1,3 +1,5 @@
-module.exports.home  = function(requset,response){
-    return response.end('<h1>Express is up for Codeil');
+module.exports.home  = function(req,res){
+    return res.render('home.ejs',{
+        title : 'home'
+    });
 }

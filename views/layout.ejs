@@ -3,15 +3,21 @@
     <head>
         <title><%= title%></title>
         <link rel="stylesheet" href="/css/layout.css">
+        <link rel="stylesheet" href="/css/header.css">
+        <link rel="stylesheet" href="/css/footer.css">
         <%- style %>
     </head>
     <body>
+        
         <!-- adding the header -->
         <%- include('_header'); %>
         <!-- variable body -->
-        <%- body %>
+        <main id="layout-main"></main>
+            <%- body %>
+        </main>
         <!-- adding the footer -->
         <%- include('_footer'); %>
+    
         <%- script %>
     </body>
 </html>

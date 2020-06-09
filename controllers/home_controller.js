@@ -1,5 +1,19 @@
+const Post = require('../models/post');
 module.exports.home  = function(req,res){
-    return res.render('home.ejs',{
-        title : 'home'
+
+    // Post.find({},function(err,posts){
+    //     return res.render('home.ejs',{
+    //         title : 'Codeil | Home',
+    //         posts : posts
+    // });
+    
+    // });
+
+    Post.find({}).populate('user').exec(function(err,posts){
+        return res.render('home.ejs',{
+            title:'Codeil | Home',
+            posts:posts
+        });
     });
+
 }

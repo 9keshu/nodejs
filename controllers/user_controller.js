@@ -1,14 +1,33 @@
 const User = require('../models/user');
 
 module.exports.profile = function(req,res){
-    res.render('users.ejs',{
-        title:'Codeil | Profile'
+    User.findById(req.params.id,function(err,user){
+        res.render('users.ejs',{
+            title:'Codeil | Profile',
+            profile_user:user
+        });
     });
+    
 }
+
+module.exports.update = function(req,res){
+    if(req.user.id == req.params.id){
+        User.findByIdAndUpdate(req.params.id,req.body,function(err,user){
+            return res.redirect('back');
+        });
+    }
+    else{
+        return res.status(401).send('Unauthorized');
+    }
+}
+
+
+
+
 
 module.exports.sign_in = function(req,res){
     if(req.isAuthenticated()){
-        return res.redirect('/users/profile');
+        return res.redirect('/home');
     }
     res.render('sign-in.ejs',{
         title: 'Codeil | Sign In'
@@ -17,7 +36,7 @@ module.exports.sign_in = function(req,res){
 
 module.exports.sign_up = function(req,res){
     if(req.isAuthenticated()){
-        return res.redirect('/users/profile');
+        return res.redirect('/home');
     }
     res.render('sign-up.ejs',{
         title: 'Codeil | Sign Up'

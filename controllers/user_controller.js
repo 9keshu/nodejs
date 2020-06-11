@@ -27,7 +27,7 @@ module.exports.update = function(req,res){
 
 module.exports.sign_in = function(req,res){
     if(req.isAuthenticated()){
-        return res.redirect('/home');
+        return res.redirect('/users/profile');
     }
     res.render('sign-in.ejs',{
         title: 'Codeil | Sign In'
@@ -36,7 +36,7 @@ module.exports.sign_in = function(req,res){
 
 module.exports.sign_up = function(req,res){
     if(req.isAuthenticated()){
-        return res.redirect('/home');
+        return res.redirect('/users/profile');
     }
     res.render('sign-up.ejs',{
         title: 'Codeil | Sign Up'
@@ -75,11 +75,13 @@ module.exports.create = function(req,res){
 
 //sign in and create session  for the user
 module.exports.createSession = function(req,res){
-    return res.redirect('/users/profile');
+    req.flash('success','Logged in Successfully');
+    return res.redirect('/');
 }
 
 
 module.exports.destroySession = function(req,res){
     req.logout();
+    req.flash('success','You have logged out!');
     return res.redirect('/');
 }

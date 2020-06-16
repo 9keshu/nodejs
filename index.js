@@ -7,6 +7,8 @@ const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const passport = require('passport');
 const LocalStrategy = require('./config/passport-local-strategy');
+const passportJWT = require('./config/passport-jwt-strategy');
+const passportgoogle = require('./config/passport-google-oauth2-strategy');
 const MongoStore = require('connect-mongo')(session);
 const sassMiddleware = require('node-sass-middleware');
 const flash = require('connect-flash');
@@ -23,6 +25,8 @@ app.use(sassMiddleware({
 app.use(expressLayout);
 //setting the static files
 app.use(express.static('./assets'));
+//make the upload path avaiable to the browser
+app.use('/uploads',express.static(__dirname + '/uploads'))
 //setting the link tags in the head and script in bottom
 app.set('layout extractStyles',true);
 app.set('layout extractScripts',true);

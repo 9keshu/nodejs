@@ -35,6 +35,16 @@
     <small>
     <b>${ post.user.name }</b>
     </small>
+    <br>
+    <small>
+        <a href="/likes/toggle/?id=${post._id}&type=Post" class="toggle-like-button" data-likes="0">
+            <%= post.likes.length %> Likes
+        </a>
+    
+    
+    
+    </small>
+
     <div class="post-comments">
     
         <form action="/comments/create" method="POST">
@@ -72,6 +82,24 @@
             });
         });
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     createPost();
 }

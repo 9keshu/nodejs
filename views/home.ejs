@@ -1,4 +1,6 @@
-<link rel="stylesheet" href="/css/home.css">
+<link rel="stylesheet" href="<%= assetPath('css/home.css') %>">
+<link rel="stylesheet" href="<%= assetPath('css/chat_box.css') %>">
+
 <h1>Welcome to <%= title%></h1>
 <div id= "home-container">
 <% if(locals.user) {%>
@@ -10,7 +12,7 @@
                 </form>
         </section>
 <% } %> 
-
+</div>
 <div id="post-list-container">
 <ul>
         <% for(post of posts){ %>
@@ -27,6 +29,29 @@
                 </p>
         <%}%>
 </section>
-</div>
 
-<script src="/js/home_posts.js"></script>
+
+
+<%- include('_chat_box') -%>
+<script src="<%= assetPath('js/home_posts.js') %>"></script>
+<script src="<%= assetPath('js/toggle_likes.js') %>"></script>
+
+<!-- importing this script for creating the comments -->
+<script src="<%= assetPath('js/home_post_comments.js') %>" ></script>
+
+
+<!-- CHANGE :: import the script file for toggle likes, also run it over for the already present posts and comments on the page -->
+
+<script>
+         $('.toggle-like-button').each(function(){
+        let self = this;
+        let toggleLike = new ToggleLike(self);
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
+<script src="<%= assetPath('js/chat_engine.js') %>"></script>
+<% if(locals.user) {%>
+<script>
+        new ChatEngine('user-chat-box','<%= locals.user.email %>');
+</script>
+<% } %>
